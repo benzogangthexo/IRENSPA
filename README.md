@@ -43,3 +43,9 @@ src/
 
 ## Проверка
 `node scripts/qa.mjs http://localhost:3102 --shots=375,1440` (10 ширин: горизонтальный скролл, выход за край, тач-цели, обрезанный текст, битые картинки, ошибки консоли, CLS), флаги `--reduced`, `--nojs`.
+
+## GitHub Pages (статическая версия, бесплатный хостинг)
+- Адрес: https://benzogangthexo.github.io/IRENSPA/
+- Собрать заново: `pnpm build:pages` (результат в `docs/`, закоммитить и запушить). Запись, фильтры и меню работают прямо в браузере теми же обработчиками API (`src/lib/api/local.ts`), фото заранее нарезаны в WebP под все ширины экрана.
+- Включить один раз: Settings -> Pages -> Build and deployment: Deploy from a branch -> ветка `claude/sleepy-brahmagupta-jy6nfi` (или `main` после слияния PR) -> папка `/docs` -> Save.
+- Полная версия с сервером (заявки уходят на бэкенд): `pnpm build && pnpm start` или Vercel.
