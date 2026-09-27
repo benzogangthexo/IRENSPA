@@ -21,7 +21,7 @@ import {
   type BookingResponse,
   type SlotsResponse,
 } from "@/lib/api/schemas";
-import { bookingDays, buildSlots, formatDateLong, type BookingStep } from "@/lib/booking";
+import { bookingDays, buildSlots, formatDateLong, type BookingStep, optionInScope, pruneChoices } from "@/lib/booking";
 import { cn, telHref } from "@/lib/utils";
 
 import { BOOKING_EVENT, type BookingPreset } from "./preset";
@@ -109,16 +109,17 @@ export function BookingWizard({ className, successNote }: { className?: string; 
 
   useEffect(() => {
     const onPreset = (e: Event) => {
-      const { stepId, optionId } = (e as CustomEvent<BookingPreset>).detail;
+      const { stepId, optionId, also } = (e as CustomEvent<BookingPreset>).detail;
       const at = FLOW.findIndex((f) => flowId(f) === stepId);
       if (at < 0) return;
-      const next = { ...choicesRef.current, [stepId]: optionId };
+      const merged = { ...choicesRef.current, ...also, [stepId]: optionId };
+      const next = pruneChoices(config, merged, config.scopeStep ? merged[config.scopeStep] : undefined);
       const firstOpen = FLOW.findIndex((f) => f.kind === "choice" && !next[f.step.id]);
       setInteracted(true);
       setResult(null);
       setChoices(next);
       setIndex(firstOpen >= 0 ? firstOpen : config.steps.length);
-      if (stepId === config.scopeStep) {
+      if (stepId === config.scopeStep || (config.scopeStep && also?.[config.scopeStep])) {
         setDate(null);
         setTime(null);
         setHoldId(null);
@@ -134,7 +135,10 @@ export function BookingWizard({ className, successNote }: { className?: string; 
   };
 
   const choose = (step: BookingStep, optionId: string, advance: boolean) => {
-    setChoices((prev) => ({ ...prev, [step.id]: optionId }));
+    setChoices((prev) => {
+      const merged = { ...prev, [step.id]: optionId };
+      return step.id === config.scopeStep ? pruneChoices(config, merged, optionId) : merged;
+    });
     if (step.id === config.scopeStep && choices[step.id] !== optionId) {
       setDate(null);
       setTime(null);
@@ -355,6 +359,7 @@ export function BookingWizard({ className, successNote }: { className?: string; 
             step={current.step}
             uid={uid}
             value={choices[current.step.id]}
+            scope={current.step.id === config.scopeStep ? undefined : scope}
             group={groupFilter[current.step.id]}
             onGroup={(g) => setGroupFilter((p) => ({ ...p, [current.step.id]: g }))}
             onChoose={(id, advance) => choose(current.step, id, advance)}
@@ -515,6 +520,7 @@ function ChoiceStep({
   step,
   uid,
   value,
+  scope,
   group,
   onGroup,
   onChoose,
@@ -522,14 +528,17 @@ function ChoiceStep({
   step: BookingStep;
   uid: string;
   value: string | undefined;
+  scope: string | undefined;
   group: string | undefined;
   onGroup: (g: string) => void;
   onChoose: (id: string, advance: boolean) => void;
 }) {
-  const groups = step.groups ?? [];
-  const selectedGroup = step.options.find((o) => o.id === value)?.group;
-  const activeGroup = group ?? selectedGroup ?? groups[0]?.id;
-  const options = groups.length ? step.options.filter((o) => o.group === activeGroup) : step.options;
+  const visible = step.options.filter((o) => optionInScope(o, scope));
+  const groups = (step.groups ?? []).filter((g) => visible.some((o) => o.group === g.id));
+  const selectedGroup = visible.find((o) => o.id === value)?.group;
+  const wanted = group ?? selectedGroup;
+  const activeGroup = groups.some((g) => g.id === wanted) ? wanted : groups[0]?.id;
+  const options = groups.length ? visible.filter((o) => o.group === activeGroup) : visible;
   return (
     <fieldset className="mt-5">
       <legend className="sr-only">{step.title}</legend>

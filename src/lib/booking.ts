@@ -10,6 +10,8 @@ export type BookingOption = {
   price?: string;
   group?: string;
   badge?: string;
+  /** значения шага scopeStep, где опция доступна (нет = везде) */
+  scopes?: string[];
 };
 
 export type BookingStep = {
@@ -87,6 +89,20 @@ export function formatDateLong(date: string) {
   return new Intl.DateTimeFormat("ru-RU", { weekday: "long", day: "numeric", month: "long", timeZone: "UTC" }).format(
     new Date(`${date}T12:00:00Z`),
   );
+}
+
+/** Опция доступна в выбранном салоне/филиале */
+export const optionInScope = (o: BookingOption, scope?: string) => !o.scopes || !scope || o.scopes.includes(scope);
+
+/** Выборы, которые остаются валидными после смены scope */
+export function pruneChoices(config: BookingConfig, choices: Record<string, string>, scope?: string) {
+  const next = { ...choices };
+  for (const step of config.steps) {
+    if (step.id === config.scopeStep) continue;
+    const opt = step.options.find((o) => o.id === next[step.id]);
+    if (opt && !optionInScope(opt, scope)) delete next[step.id];
+  }
+  return next;
 }
 
 export function weekFor(config: BookingConfig, scope?: string): Week {

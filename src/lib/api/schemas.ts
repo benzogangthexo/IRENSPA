@@ -70,3 +70,28 @@ export const BookingResponseSchema = z.object({
   summary: z.array(z.object({ label: z.string(), value: z.string() })),
 });
 export type BookingResponse = z.infer<typeof BookingResponseSchema>;
+
+/* Прайс: /api/services?salon=&category= */
+export const ServicesQuerySchema = z.object({
+  salon: z.string().min(1, "Укажите салон").max(20),
+  category: z.enum(["hair", "nails", "cosmo", "massage", "hammam"], { message: "Нет такой категории" }).optional(),
+});
+
+export const ServiceSchema = z.object({
+  id: z.string(),
+  salon: z.enum(["spa", "vip"]),
+  category: z.enum(["hair", "nails", "cosmo", "massage", "hammam"]),
+  title: z.string(),
+  note: z.string().optional(),
+  from: z.number().int().positive(),
+  to: z.number().int().positive().optional(),
+  unit: z.string().optional(),
+});
+export type ServiceDTO = z.infer<typeof ServiceSchema>;
+
+export const ServicesResponseSchema = z.object({
+  salon: z.enum(["spa", "vip"]),
+  category: z.enum(["hair", "nails", "cosmo", "massage", "hammam"]).nullable(),
+  items: z.array(ServiceSchema),
+});
+export type ServicesResponse = z.infer<typeof ServicesResponseSchema>;

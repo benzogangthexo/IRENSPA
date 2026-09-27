@@ -2,7 +2,7 @@ import { bookingConfig } from "@/content/booking";
 import { fail, flaky, invalid, latency, ok } from "@/lib/api/http";
 import { BookingRequestSchema, type BookingResponse } from "@/lib/api/schemas";
 import { isHeld, newId, slotKey, store } from "@/lib/api/store";
-import { buildSlots, formatDateLong } from "@/lib/booking";
+import { buildSlots, formatDateLong, optionInScope } from "@/lib/booking";
 
 export async function POST(req: Request) {
   const json: unknown = await req.json().catch(() => null);
@@ -16,14 +16,17 @@ export async function POST(req: Request) {
   await latency(500, 1100);
   if (flaky(req)) return fail(503, "unavailable", "Заявка не ушла, пробуем ещё раз");
 
+  const scope = bookingConfig.scopeStep ? data.choices[bookingConfig.scopeStep] : undefined;
   const summary: BookingResponse["summary"] = [];
   for (const step of bookingConfig.steps) {
     const option = step.options.find((o) => o.id === data.choices[step.id]);
     if (!option) return fail(422, "choice_missing", `Выберите: ${step.title.toLowerCase()}`, { [step.id]: ["Не выбрано"] });
+    if (!optionInScope(option, scope)) {
+      return fail(422, "choice_scope", "Этой услуги нет в выбранном салоне", { [step.id]: ["Нет в этом салоне"] });
+    }
     summary.push({ label: step.title, value: option.label });
   }
 
-  const scope = bookingConfig.scopeStep ? data.choices[bookingConfig.scopeStep] : undefined;
   const key = slotKey(data.date, data.time, scope);
   const slot = buildSlots(bookingConfig, data.date, scope).slots.find((s) => s.time === data.time);
   const hold = data.holdId ? store.holds.get(data.holdId) : undefined;
