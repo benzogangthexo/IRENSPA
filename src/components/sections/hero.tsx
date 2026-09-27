@@ -85,7 +85,7 @@ export function Hero() {
 
         <div className="split flex flex-col gap-5 sm:flex-row lg:col-span-6 lg:h-[min(calc(100svh-var(--header-h)-3rem),820px)] lg:min-h-[34rem] lg:gap-6">
           {panels.map((p, i) => (
-            <div key={p.salon.id} className="fade-immediate relative" style={d(`${0.35 + i * 0.12}s`)}>
+            <div key={p.salon.id} className="relative">
               <a
                 href={`#salon-${p.salon.id}`}
                 className="arch group relative block aspect-[4/3] overflow-hidden bg-surface sm:aspect-[3/4] lg:aspect-auto lg:h-full"
@@ -94,15 +94,17 @@ export function Hero() {
               >
                 {/* средний план: фото отстаёт от скролла с разной скоростью */}
                 <Parallax speed={p.speed} className="absolute inset-x-0 -bottom-[9vh] -top-[9vh]">
-                  <Image
-                    src={p.image}
-                    alt={p.alt}
-                    fill
-                    preload
-                    quality={75}
-                    sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
-                    className="split__img object-cover"
-                  />
+                  <div className="hero-zoom absolute inset-0" style={d(`${0.2 + i * 0.12}s`)}>
+                    <Image
+                      src={p.image.src}
+                      alt={p.alt}
+                      fill
+                      preload={i === 0}
+                      quality={75}
+                      sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
+                      className="split__img object-cover"
+                    />
+                  </div>
                 </Parallax>
                 <span aria-hidden="true" className="photo-veil absolute inset-0" />
                 <span className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
@@ -116,7 +118,7 @@ export function Hero() {
               </a>
               {/* ближний план: бронзовая рамка-зеркало обгоняет скролл */}
               <Parallax speed={-0.22} className="pointer-events-none absolute -inset-2 sm:-inset-2.5">
-                <span aria-hidden="true" className="arch block h-full w-full border border-brand/45" />
+                <span aria-hidden="true" className="arch frame-in block h-full w-full border border-brand/50" style={d(`${1.1 + i * 0.15}s`)} />
               </Parallax>
             </div>
           ))}

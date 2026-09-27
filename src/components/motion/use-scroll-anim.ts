@@ -25,11 +25,28 @@ export function useScrollAnim(
     const el = ref.current;
     const [frames, offset, times] = JSON.parse(key) as [Keyframes | null, ScrollOffset | null, number[] | null];
     if (!el || !frames || !motionAllowed()) return;
-    const controls = animate(el, frames, { ease: "linear", duration: 1, ...(times ? { times } : {}) });
-    const stop = scroll(controls, { target: target?.current ?? el, ...(offset ? { offset } : {}) });
+    const watched = target?.current ?? el;
+    let active: (() => void) | undefined;
+    /* включаем анимацию только рядом с экраном: меньше работы на старте и при скролле на телефоне */
+    const stopView = inView(
+      watched,
+      () => {
+        const controls = animate(el, frames, { ease: "linear", duration: 1, ...(times ? { times } : {}) });
+        const stop = scroll(controls, { target: watched, ...(offset ? { offset } : {}) });
+        active = () => {
+          stop();
+          controls.stop();
+        };
+        return () => {
+          active?.();
+          active = undefined;
+        };
+      },
+      { margin: "60% 0px 60% 0px" },
+    );
     return () => {
-      stop();
-      controls.stop();
+      stopView();
+      active?.();
     };
   }, [ref, target, key]);
 }

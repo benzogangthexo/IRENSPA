@@ -26,7 +26,6 @@ const body = localFont({
   src: [
     { path: "../fonts/ysabeau-office-400.woff2", weight: "400", style: "normal" },
     { path: "../fonts/ysabeau-office-500.woff2", weight: "500", style: "normal" },
-    { path: "../fonts/ysabeau-office-600.woff2", weight: "600", style: "normal" },
   ],
   variable: "--ff-body",
   display: "swap",

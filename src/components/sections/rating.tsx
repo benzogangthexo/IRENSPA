@@ -75,12 +75,11 @@ export function Rating() {
             </ScrollRotate>
             <div className="absolute inset-[17%] overflow-hidden rounded-[58%_42%_47%_53%/52%_45%_55%_48%] border border-brand/50 shadow-[0_0_80px_-10px_rgb(201_149_94/0.35)]">
               <Image
-                src={mirror}
+                src={mirror.src}
                 alt=""
                 fill
                 quality={75}
                 sizes="(min-width: 1024px) 27rem, 58vw"
-                placeholder="blur"
                 className="object-cover"
               />
             </div>

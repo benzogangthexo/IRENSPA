@@ -123,8 +123,8 @@ export const directions: Direction[] = [
     title: "Волосы и сложный цвет",
     text: "Airtouch, total blonde, балаяж, выход из тёмного. Три уровня мастеров: стилист, топ-стилист, арт-директор.",
     prices: [
-      { label: "Окрашивание, Spa IREN", serviceId: "spa-hair-tone" },
-      { label: "Окрашивание, VIP IREN", serviceId: "vip-hair-color" },
+      { label: "Окрашивание", serviceId: "spa-hair-tone" },
+      { label: "Окрашивание", serviceId: "vip-hair-color" },
       { label: "Airtouch", serviceId: "spa-hair-airtouch" },
     ],
     salons: ["spa", "vip"],

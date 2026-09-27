@@ -38,12 +38,11 @@ export function Salons() {
               >
                 <div className="relative aspect-[16/10] bg-surface-2">
                   <Image
-                    src={s.image}
+                    src={s.image.src}
                     alt={s.imageAlt}
                     fill
                     quality={75}
                     sizes="(min-width: 768px) 46vw, 94vw"
-                    placeholder="blur"
                     className="object-cover"
                     style={s.imagePosition ? { objectPosition: s.imagePosition } : undefined}
                   />

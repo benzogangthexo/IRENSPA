@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { MIRROR_PATH } from "@/components/brand/wordmark";
 import { MobileCta } from "@/components/layout/mobile-cta";
 import { Preloader } from "@/components/motion/preloader";
@@ -81,17 +83,38 @@ export default function Home() {
       <SiteHeader />
       <main id="main">
         <Hero />
-        <Manifesto />
-        <Directions />
-        <Prices initial={initialPrices} />
-        <Portfolio />
-        <Rating />
-        <Hammam />
-        <Salons />
-        <Reviews />
-        <Booking />
+        {/* отдельные границы: гидрация идёт кусками, без одного длинного таска */}
+        <Suspense fallback={null}>
+          <Manifesto />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Directions />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Prices initial={initialPrices} />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Portfolio />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Rating />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Hammam />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Salons />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Reviews />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Booking />
+        </Suspense>
       </main>
-      <SiteFooter />
+      <Suspense fallback={null}>
+        <SiteFooter />
+      </Suspense>
       <MobileCta label="Записаться" phone={PHONE_MAIN.tel} heroId="hero" targetId="booking" />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd()) }} />
     </>

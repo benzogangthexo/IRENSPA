@@ -73,7 +73,7 @@ export type BookingResponse = z.infer<typeof BookingResponseSchema>;
 
 /* Прайс: /api/services?salon=&category= */
 export const ServicesQuerySchema = z.object({
-  salon: z.string().min(1, "Укажите салон").max(20),
+  salon: z.string({ message: "Укажите салон: spa или vip" }).min(1, "Укажите салон: spa или vip").max(20),
   category: z.enum(["hair", "nails", "cosmo", "massage", "hammam"], { message: "Нет такой категории" }).optional(),
 });
 

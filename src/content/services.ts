@@ -16,7 +16,7 @@ export type Service = {
   unit?: string;
 };
 
-const LEVELS = "стилист, топ-стилист или арт-директор";
+const LEVELS = "стилист, топ-стилист, арт-директор";
 
 export const services: Service[] = [
   // Spa IREN: волосы
@@ -61,7 +61,7 @@ export const services: Service[] = [
 
   // VIP IREN: волосы
   { id: "vip-hair-cut", salon: "vip", category: "hair", title: "Женская стрижка", from: 3100, to: 5300 },
-  { id: "vip-hair-color", salon: "vip", category: "hair", title: "Окрашивание", note: "VIP-стилист, топ-стилист или арт-директор", from: 5400, to: 20000 },
+  { id: "vip-hair-color", salon: "vip", category: "hair", title: "Окрашивание", note: LEVELS, from: 5400, to: 20000 },
   { id: "vip-hair-tone", salon: "vip", category: "hair", title: "Тонирование", from: 4100 },
   { id: "vip-hair-contour", salon: "vip", category: "hair", title: "Контуринг", from: 5000, to: 11000 },
   { id: "vip-hair-blond", salon: "vip", category: "hair", title: "Total blonde", from: 8100, to: 27000 },

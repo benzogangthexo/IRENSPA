@@ -1,6 +1,6 @@
 "use client";
 
-import { scroll } from "motion";
+import { inView, scroll } from "motion";
 import { useEffect, useRef, type ElementType } from "react";
 
 import { cn } from "@/lib/utils";
@@ -33,17 +33,35 @@ export function WordReveal({
     if (!el || !motionAllowed()) return;
     const spans = Array.from(el.querySelectorAll<HTMLElement>("[data-word]"));
     const n = spans.length;
+    const last = new Array<number>(n).fill(-1);
     const apply = (p: number) => {
       const head = p * (n + 4);
       for (let i = 0; i < n; i += 1) {
-        const v = Math.min(1, Math.max(0, (head - i) / 4));
+        const v = Math.round(Math.min(1, Math.max(0, (head - i) / 4)) * 50) / 50;
+        if (v === last[i]) continue;
+        last[i] = v;
         const s = spans[i].style;
         s.opacity = String(v);
         s.filter = v >= 1 ? "none" : `blur(${((1 - v) * 7).toFixed(2)}px)`;
       }
     };
     apply(0);
-    return scroll(apply, { target: el, offset: ["start 0.85", "end 0.45"] });
+    let stop: (() => void) | undefined;
+    const stopView = inView(
+      el,
+      () => {
+        stop = scroll(apply, { target: el, offset: ["start 0.85", "end 0.45"] });
+        return () => {
+          stop?.();
+          stop = undefined;
+        };
+      },
+      { margin: "40% 0px 40% 0px" },
+    );
+    return () => {
+      stopView();
+      stop?.();
+    };
   }, [text]);
 
   return (

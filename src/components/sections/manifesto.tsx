@@ -67,12 +67,11 @@ export function Manifesto() {
         <figure className="mt-5 md:mt-8">
           <GrowMedia from={0.8} className="aspect-[4/3] rounded-[var(--radius-2xl)] bg-surface sm:aspect-[16/9]">
             <Image
-              src={manifestRing}
+              src={manifestRing.src}
               alt="Гостья у кольцевой лампы, длинные волосы после окрашивания в тёплый медный"
               fill
               quality={75}
               sizes="(min-width: 1440px) 1344px, 94vw"
-              placeholder="blur"
               className="object-cover"
             />
           </GrowMedia>

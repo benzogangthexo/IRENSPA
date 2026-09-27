@@ -655,3 +655,33 @@ html:not(.js) [data-motion] {
     font-size: clamp(3.4rem, 0.4rem + 4.9vw, 5.5rem);
   }
 }
+
+/* бронзовые рамки арок «оседают» после шторки (transform/opacity) */
+html.js:not(.rm) .frame-in {
+  opacity: 0;
+  transform: scale(1.05);
+  animation: frame-in 1.6s var(--ease-out-expo) calc(var(--mask-delay, 0s) + var(--d, 0.8s)) forwards;
+}
+html.js:not(.rm):not(.pl-skip) .frame-in {
+  --mask-delay: 1.35s;
+}
+@keyframes frame-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* фото hero видны сразу (LCP), после шторки мягко «отъезжают» к масштабу 1 */
+html.js:not(.rm) .hero-zoom {
+  transform: scale(1.1);
+  animation: hero-zoom 2.2s var(--ease-out-expo) calc(var(--mask-delay, 0s) + var(--d, 0.2s)) forwards;
+}
+html.js:not(.rm):not(.pl-skip) .hero-zoom {
+  --mask-delay: 1.35s;
+}
+@keyframes hero-zoom {
+  to {
+    transform: none;
+  }
+}

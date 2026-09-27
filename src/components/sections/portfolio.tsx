@@ -44,7 +44,6 @@ export function Portfolio() {
                     alt={w.alt}
                     quality={75}
                     sizes="(min-width: 1440px) 440px, (min-width: 768px) 31vw, 47vw"
-                    placeholder="blur"
                     className="h-auto w-full transition-transform duration-[1.2s] ease-[var(--ease-out-expo)] group-hover:scale-[1.04]"
                   />
                   <span className="pointer-events-none absolute inset-x-0 bottom-0 hidden items-end justify-between gap-3 bg-gradient-to-t from-bg/85 via-bg/30 to-transparent p-4 pt-12 text-left text-sm opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100 md:flex">

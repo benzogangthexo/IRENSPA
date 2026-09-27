@@ -83,12 +83,11 @@ export function Hammam() {
             <figure>
               <div className="relative aspect-[4/5] overflow-hidden rounded-t-[999px] rounded-b-[var(--radius-2xl)] bg-surface">
                 <Image
-                  src={hammamImg}
+                  src={hammamImg.src}
                   alt="Хаммам Spa IREN: мраморная лежанка, мягкая подсветка и тёмный камень"
                   fill
                   quality={75}
                   sizes="(min-width: 1024px) 52vw, 94vw"
-                  placeholder="blur"
                   className="object-cover"
                 />
               </div>
@@ -99,12 +98,11 @@ export function Hammam() {
             <Parallax speed={-0.12}>
               <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-xl)] bg-surface">
                 <Image
-                  src={spaRoom}
+                  src={spaRoom.src}
                   alt="Спа-кабинет с массажным столом, шторами и живыми растениями"
                   fill
                   quality={75}
                   sizes="(min-width: 1024px) 26vw, 46vw"
-                  placeholder="blur"
                   className="object-cover"
                 />
               </div>
@@ -112,12 +110,11 @@ export function Hammam() {
             <Parallax speed={0.12}>
               <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-xl)] bg-surface">
                 <Image
-                  src={spaRelax}
+                  src={spaRelax.src}
                   alt="Релакс-зона: два кресла, столик и зелень на тёмной стене"
                   fill
                   quality={75}
                   sizes="(min-width: 1024px) 26vw, 46vw"
-                  placeholder="blur"
                   className="object-cover"
                 />
               </div>

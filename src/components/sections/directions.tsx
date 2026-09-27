@@ -29,12 +29,11 @@ export function Directions() {
             >
               <div className="relative aspect-[5/2] sm:aspect-[16/9] md:col-span-5 md:aspect-auto">
                 <Image
-                  src={d.image}
+                  src={d.image.src}
                   alt={d.alt}
                   fill
                   quality={75}
                   sizes="(min-width: 768px) 40vw, 100vw"
-                  placeholder="blur"
                   className="object-cover"
                 />
               </div>
