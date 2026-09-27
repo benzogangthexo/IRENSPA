@@ -9,7 +9,7 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: "bg-brand text-brand-ink hover:bg-[color-mix(in_oklab,var(--brand)_86%,white)]",
+        primary: "bg-brand bg-bronze text-brand-ink hover:brightness-110 active:brightness-95",
         outline: "border border-line-strong text-fg hover:border-fg hover:bg-[color-mix(in_oklab,var(--fg)_6%,transparent)]",
         ghost: "text-fg hover:bg-[color-mix(in_oklab,var(--fg)_8%,transparent)]",
         paper: "bg-paper text-paper-ink hover:bg-[color-mix(in_oklab,var(--paper)_88%,black)]",

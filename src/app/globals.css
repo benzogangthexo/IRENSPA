@@ -5,44 +5,44 @@
    BRAND TOKENS: меняй только значения (палитра из BRIEF.md)
    ============================================================ */
 :root {
-  --bg: #0e0e10;
-  --bg-2: #09090b;
-  --surface: #151518;
-  --surface-2: #1c1c20;
-  --line: rgb(240 236 228 / 0.12);
-  --line-strong: rgb(240 236 228 / 0.24);
-  --fg: #f0ece4;
-  --fg-muted: #b3ada3;
-  --brand: #d2ae67;
-  --brand-ink: #111111;
-  --brand-2: #8c6a2f;
-  --brand-3: #9cc54a;
-  --paper: #f0e7d6;
-  --paper-ink: #1b1712;
-  --danger: #ff7a6b;
-  --ok: #8fd18a;
+  --bg: #15100c;
+  --bg-2: #0f0b08;
+  --surface: #1e1712;
+  --surface-2: #281f18;
+  --line: rgb(239 230 218 / 0.12);
+  --line-strong: rgb(239 230 218 / 0.26);
+  --fg: #efe6da;
+  --fg-muted: #b8ab9b;
+  --brand: #c9955e;
+  --brand-ink: #15100c;
+  --brand-2: #8a5a34;
+  --brand-3: #f1d3a2;
+  --paper: #efe6da;
+  --paper-ink: #1e1712;
+  --danger: #ff9a82;
+  --ok: #a9d4a0;
 
-  --radius: 0.75rem;
+  --radius: 0.875rem;
   --radius-pill: 999px;
   --shadow-soft: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 24px 60px -24px rgb(0 0 0 / 0.6);
   --shadow-lift: 0 1px 0 rgb(255 255 255 / 0.06) inset, 0 40px 90px -30px rgb(0 0 0 / 0.75);
   --glow: radial-gradient(60% 60% at 50% 0%, color-mix(in oklab, var(--brand) 18%, transparent), transparent 70%);
 
-  --cursor-color: var(--fg);
+  --cursor-color: var(--brand-3);
   --cursor-label-bg: var(--brand);
   --cursor-label-fg: var(--brand-ink);
 
   /* типографика: clamp() от 320 до 1920 */
-  --fs-hero: clamp(2.6rem, 1.55rem + 5.2vw, 8.25rem);
-  --fs-h1: clamp(2.2rem, 1.45rem + 3.6vw, 5.5rem);
-  --fs-h2: clamp(1.85rem, 1.3rem + 2.5vw, 4rem);
+  --fs-hero: clamp(2.35rem, 1.2rem + 4.6vw, 6.6rem);
+  --fs-h1: clamp(2.1rem, 1.4rem + 3.3vw, 5.25rem);
+  --fs-h2: clamp(1.8rem, 1.25rem + 2.4vw, 3.9rem);
   --fs-h3: clamp(1.3rem, 1.1rem + 0.95vw, 2rem);
   --fs-lead: clamp(1.08rem, 0.98rem + 0.45vw, 1.4rem);
   --fs-body: clamp(1rem, 0.97rem + 0.12vw, 1.0625rem);
   --fs-small: 0.875rem;
   --fs-micro: 0.75rem;
-  --lh-tight: 0.95;
-  --tracking-display: -0.02em;
+  --lh-tight: 1;
+  --tracking-display: -0.015em;
 
   /* сетка 12/6/4 */
   --container: 1440px;
@@ -50,7 +50,7 @@
   --col-gap: clamp(1rem, 0.7rem + 1.2vw, 2rem);
   --section-y: clamp(4.5rem, 3rem + 7vw, 11rem);
   --header-h: 4.5rem;
-  --mobile-cta-h: 4.25rem;
+  --mobile-cta-h: 4.5rem;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
@@ -541,4 +541,107 @@ html:not(.js) [data-motion] {
   overflow: hidden;
   clip: rect(0 0 0 0);
   white-space: nowrap;
+}
+
+/* ============================================================
+   IREN: «Бронза и пар»
+   ============================================================ */
+:root {
+  --bronze: linear-gradient(100deg, #b07a45 0%, #d8a76b 36%, #f1d3a2 60%, #c9955e 100%);
+  --preloader-bg: var(--bg-2);
+  --preloader-fg: var(--fg);
+}
+.text-bronze {
+  background: var(--bronze);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+.bg-bronze {
+  background: var(--bronze);
+}
+.rule-bronze {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #8a5a34 12%, #f1d3a2 50%, #8a5a34 88%, transparent);
+}
+/* кнопка: тёмный текст на бронзе (AA 7:1) */
+/* арка-зеркало */
+.arch {
+  border-radius: 50% 50% var(--radius) var(--radius) / 26% 26% var(--radius) var(--radius);
+}
+@media (max-width: 639px) {
+  .arch {
+    border-radius: 50% 50% var(--radius) var(--radius) / 34% 34% var(--radius) var(--radius);
+  }
+}
+/* пар: заранее размытые радиальные пятна, двигаются только transform */
+.steam {
+  position: absolute;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(241 211 162 / 0.15), rgb(216 167 107 / 0.06) 55%, transparent 100%);
+}
+.steam--cool {
+  background: radial-gradient(closest-side, rgb(239 230 218 / 0.1), rgb(239 230 218 / 0.035) 55%, transparent 100%);
+}
+/* hero: половина раскрывается при наведении (только мышь, десктоп) */
+.split > * {
+  flex: 1 1 0%;
+  min-width: 0;
+}
+@media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+  html:not(.rm) .split > * {
+    transition: flex-grow 0.9s var(--ease-out-expo);
+  }
+  .split:has(> :hover) > :not(:hover),
+  .split:has(> :focus-visible) > :not(:focus-visible) {
+    flex-grow: 0.62;
+  }
+  .split > :hover,
+  .split > :focus-visible {
+    flex-grow: 1.38;
+  }
+  .split > :hover .split__img {
+    transform: scale(1.04);
+  }
+}
+.split__img {
+  transition: transform 1.2s var(--ease-out-expo);
+}
+/* лёгкая бронзовая виньетка по краям фото */
+.photo-veil::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(21 16 12 / 0) 45%, rgb(21 16 12 / 0.78) 100%);
+}
+/* текст по кругу (зеркало) */
+.ring-text {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+/* мозаика портфолио */
+.mosaic {
+  columns: 2;
+  column-gap: 0.75rem;
+}
+@media (min-width: 768px) {
+  .mosaic {
+    columns: 3;
+    column-gap: 1rem;
+  }
+}
+.mosaic > * {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+}
+@media (min-width: 768px) {
+  .mosaic > * {
+    margin-bottom: 1rem;
+  }
 }
