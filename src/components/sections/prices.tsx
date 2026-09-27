@@ -63,7 +63,14 @@ export function Prices({ initial }: { initial: ServicesResponse }) {
     res.data?.items.map((s, i) => ({
       id: s.id,
       title: <span className="font-display text-[1.2rem] leading-snug sm:text-[1.55rem]">{s.title}</span>,
-      meta: [s.note, priceRange(s)].filter(Boolean).join(" · ") || undefined,
+      meta:
+        s.note || priceRange(s) ? (
+          <>
+            {s.note ? <span className={priceRange(s) ? "hidden sm:inline" : undefined}>{s.note}</span> : null}
+            {s.note && priceRange(s) ? <span className="hidden sm:inline"> · </span> : null}
+            {priceRange(s)}
+          </>
+        ) : undefined,
       aside: <span className="tabular text-brand-3 sm:text-lg">{priceLabel(s)}</span>,
       image: imageFor(s, i),
       alt: "",

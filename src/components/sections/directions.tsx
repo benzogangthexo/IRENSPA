@@ -27,7 +27,7 @@ export function Directions() {
               aria-labelledby={`dir-${d.id}`}
               className="grid overflow-hidden rounded-[var(--radius-2xl)] border border-line bg-surface shadow-[var(--shadow-lift)] md:h-[min(72svh,36rem)] md:grid-cols-12"
             >
-              <div className="relative aspect-[5/2] sm:aspect-[16/9] md:col-span-5 md:aspect-auto">
+              <div className="relative aspect-[3/1] min-[360px]:aspect-[5/2] sm:aspect-[16/9] md:col-span-5 md:aspect-auto">
                 <Image
                   src={d.image.src}
                   alt={d.alt}

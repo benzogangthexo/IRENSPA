@@ -7,7 +7,6 @@ import dirMassage from "@/assets/photos/dir-massage.jpg";
 import dirNails from "@/assets/photos/dir-nails.jpg";
 import salonSpa from "@/assets/photos/salon-spa.jpg";
 import salonVip from "@/assets/photos/salon-vip.jpg";
-import work01 from "@/assets/photos/work-01.jpg";
 import work02 from "@/assets/photos/work-02.jpg";
 import work03 from "@/assets/photos/work-03.jpg";
 import work04 from "@/assets/photos/work-04.jpg";
@@ -193,15 +192,14 @@ export type Work = { id: string; image: StaticImageData; alt: string; caption: s
 
 export const works: Work[] = [
   { id: "w9", image: work09, alt: "Длинные медные волосы с растяжкой цвета, вид со спины", caption: "Медь с растяжкой", salon: "spa" },
-  { id: "w2", image: work02, alt: "Девушка с медными волнами до плеч", caption: "Медные волны", salon: "vip" },
   { id: "w4", image: work04, alt: "Пепельные пряди на русых волнах", caption: "Холодные пряди на русом", salon: "vip" },
-  { id: "w1", image: work01, alt: "Тёплый блонд на локонах, портрет", caption: "Тёплый блонд на локонах", salon: "spa" },
-  { id: "w7", image: work07, alt: "Платиновый блонд, волосы в движении", caption: "Платиновый блонд", salon: "spa" },
-  { id: "w5", image: work05, alt: "Светлый блонд крупными волнами, вид со спины", caption: "Светлый блонд, крупные волны", salon: "vip" },
-  { id: "w8", image: work08, alt: "Кудрявые волосы в золотом блонде", caption: "Кудри в золотом блонде", salon: "spa" },
   { id: "w3", image: work03, alt: "Пепельно-русые волны с чёлкой", caption: "Пепельно-русый с чёлкой", salon: "vip" },
-  { id: "w6", image: work06, alt: "Рыжие кудри, собранные наверх", caption: "Рыжий на кудрях", salon: "spa" },
+  { id: "w2", image: work02, alt: "Девушка с медными волнами до плеч", caption: "Медные волны", salon: "vip" },
+  { id: "w5", image: work05, alt: "Светлый блонд крупными волнами, вид со спины", caption: "Светлый блонд, крупные волны", salon: "vip" },
   { id: "w10", image: work10, alt: "Ровный холодный блонд на длинных волосах, вид со спины", caption: "Холодный блонд", salon: "vip" },
+  { id: "w8", image: work08, alt: "Кудрявые волосы в золотом блонде", caption: "Кудри в золотом блонде", salon: "spa" },
+  { id: "w7", image: work07, alt: "Платиновый блонд, волосы в движении", caption: "Платиновый блонд", salon: "spa" },
+  { id: "w6", image: work06, alt: "Рыжие кудри, собранные наверх", caption: "Рыжий на кудрях", salon: "spa" },
 ];
 
 export type Review = { id: string; name: string; salon: SalonId; date: string; text: string };
