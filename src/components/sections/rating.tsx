@@ -18,7 +18,7 @@ export function Rating() {
       <Container className="grid items-center gap-14 lg:grid-cols-12 lg:gap-x-[var(--col-gap)]">
         <div className="lg:col-span-5">
           <Eyebrow index="05">Оценки гостей</Eyebrow>
-          <MaskReveal as="h2" id="rating-title" className="t-h2 mt-6" lines={["5.0 у обоих", "салонов"]} />
+          <MaskReveal as="h2" id="rating-title" className="t-h2 mt-6" lines={["5,0 у обоих", "салонов"]} />
           <p className="t-lead mt-5 max-w-[40ch] text-fg-muted">Средняя оценка на Яндекс Картах, сентябрь 2026.</p>
           <dl className="mt-10 divide-y divide-line border-y border-line">
             {[salons.spa, salons.vip].map((s) => (

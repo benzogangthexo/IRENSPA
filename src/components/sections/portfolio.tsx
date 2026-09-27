@@ -60,7 +60,7 @@ export function Portfolio() {
 
       <Dialog open={current !== null} onOpenChange={(o) => (o ? null : setOpen(null))}>
         <DialogContent
-          className="w-[min(94vw,62rem)] max-w-none border-line bg-bg-2 p-3 sm:p-4"
+          className="w-auto max-w-[96vw] border-line bg-bg-2 p-3 sm:p-4"
           onKeyDown={(e) => {
             if (e.key === "ArrowRight") step(1);
             if (e.key === "ArrowLeft") step(-1);
@@ -68,19 +68,25 @@ export function Portfolio() {
         >
           {current ? (
             <div className="grid gap-3 sm:gap-4">
-              <div className="relative h-[min(72svh,48rem)] w-full overflow-hidden rounded-[var(--radius)] bg-surface">
+              <div
+                className="relative overflow-hidden rounded-[var(--radius)] bg-surface"
+                style={{
+                  aspectRatio: `${current.image.width} / ${current.image.height}`,
+                  width: `min(calc(96vw - 2rem), calc(min(74svh, 50rem) * ${(current.image.width / current.image.height).toFixed(4)}))`,
+                }}
+              >
                 <Image
                   key={current.id}
                   src={current.image}
                   alt={current.alt}
                   fill
                   quality={85}
-                  sizes="(min-width: 1024px) 60rem, 94vw"
+                  sizes="(min-width: 1024px) 50rem, 94vw"
                   placeholder="blur"
-                  className="object-contain"
+                  className="object-cover"
                 />
               </div>
-              <div className="flex items-center justify-between gap-3 px-1">
+              <div className="flex min-w-[16rem] items-center justify-between gap-3 px-1">
                 <div className="min-w-0">
                   <DialogTitle className="font-display text-xl leading-tight sm:text-2xl">{current.caption}</DialogTitle>
                   <DialogDescription className="mt-1 text-sm text-fg-muted">

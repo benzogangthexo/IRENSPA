@@ -60,7 +60,7 @@ export function Hero() {
             ]}
           />
           <p className="t-lead fade-immediate mt-6 max-w-[34ch] text-fg-muted sm:mt-8" style={d("0.45s")}>
-            Spa IREN у Мещерского озера, на Карла Маркса, 32, и VIP IREN на Варварской, 8/22. У обоих салонов 5.0 на Яндекс Картах.
+            Spa IREN у Мещерского озера, на Карла Маркса, 32, и VIP IREN на Варварской, 8/22. У обоих салонов 5,0 на Яндекс Картах.
           </p>
           <div className="fade-immediate mt-7 flex flex-wrap items-center gap-3 sm:mt-9" style={d("0.55s")}>
             <MagneticButton asChild size="lg">
@@ -75,7 +75,7 @@ export function Hero() {
               <div key={s.id}>
                 <dt className="text-sm text-fg-muted">{s.name}</dt>
                 <dd className="mt-1 flex items-baseline gap-2">
-                  <span className="text-bronze font-display text-3xl leading-none">5.0</span>
+                  <span className="text-bronze font-display text-3xl leading-none">5,0</span>
                   <span className="tabular text-sm text-fg-muted">{s.rating.count} оценок</span>
                 </dd>
               </div>

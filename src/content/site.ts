@@ -40,6 +40,7 @@ export type Salon = {
   yclientsUrl: string;
   image: StaticImageData;
   imageAlt: string;
+  imagePosition?: string;
   summary: string;
   features: string[];
 };
@@ -84,6 +85,7 @@ export const salons: Record<SalonId, Salon> = {
     yclientsUrl: "https://yc.gl/book/339238",
     image: salonVip,
     imageAlt: "Вход в VIP IREN: бронзовые буквы IREN на тёмном фасаде",
+    imagePosition: "50% 12%",
     summary: "Три этажа и 500 м²: VIP-кабинеты для волос, врачебная и аппаратная косметология.",
     features: ["Сложные окрашивания", "Лазерная эпиляция", "Quanta System", "Liftera-A"],
   },

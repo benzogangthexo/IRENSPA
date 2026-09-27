@@ -45,6 +45,7 @@ export function Salons() {
                     sizes="(min-width: 768px) 46vw, 94vw"
                     placeholder="blur"
                     className="object-cover"
+                    style={s.imagePosition ? { objectPosition: s.imagePosition } : undefined}
                   />
                 </div>
                 <div className="flex flex-1 flex-col p-5 sm:p-8 lg:p-10">
@@ -92,7 +93,7 @@ export function Salons() {
                           rel="noopener noreferrer"
                           className="inline-flex min-h-11 items-center gap-1.5 underline-offset-4 hover:underline"
                         >
-                          <span className="text-brand-3">5.0</span>
+                          <span className="text-brand-3">5,0</span>
                           <span className="tabular text-fg-muted">· {s.rating.reviews} отзывов</span>
                           <ArrowUpRight aria-hidden="true" className="size-4" />
                           <span className="sr-only">(откроется в новой вкладке)</span>
